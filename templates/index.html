@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+</head>
+
+<body>
+    {% extends 'base.html' %}
+    {% block content %}
+    <h1>Items</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th colspan="2">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td><a href="{{ url_for('update',idNum=item.idNum) }}">Edit</a></td>
+                <td>
+                    <form method="POST" action="{{ url_for('delete', idNum=item.idNum) }}">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ url_for('create') }}">Add new item</a>
+    {% endblock %}
+</body>
+
+</html>
